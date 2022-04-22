@@ -1,0 +1,27 @@
+# linkage pruning to remove Snps with high LD
+# remove missing sites, treemix does not like missing data
+
+#!/bin/bash
+
+#SBATCH --nodes=1
+#SBATCH --mem=64000
+#SBATCH --job-name=LD
+#SBATCH --partition=long
+
+module purge
+module load VCFtools/0.1.16-GCC-11.2.0
+
+
+VCF="/data/wildcru/kebl7066/VCF_Files"
+
+for i in $VCF/*.vcf
+do
+vcftools --vcf $i --max-missing 1 --recode --stdout | gzip > $i.noN.vcf.gz
+done
+
+
+
+
+
+
+

@@ -1,0 +1,18 @@
+#!/bin/bash
+
+#SBATCH --nodes=1
+#SBATCH --mem=64000
+#SBATCH --job-name=treemix
+#SBATCH --partition=medium
+
+module purge
+module load TreeMix/1.13-intel-2020a
+
+
+Input=/data/wildcru/kebl7066/slurm/Treemix/Treemix_input/treemix_input0.gz
+
+# run treemix
+treemix -i $Input -k 1000 -o tree_out3 -noss -bootstrap
+
+
+
